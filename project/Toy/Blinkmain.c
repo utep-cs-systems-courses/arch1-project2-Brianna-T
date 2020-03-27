@@ -1,5 +1,5 @@
 #include <msp430.h>
-#include "Timer.c"
+#include "timer.c"
 #include "Blinkled.c"
 
 int main(void){
