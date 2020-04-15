@@ -1,9 +1,9 @@
 all:
-	(cd Timer; make install)
+	(cd timerLib; make install)
 	(cd Toy; make)
 
 clean:
-	(cd Timer; make clean)
+	(cd timerLib; make clean)
 	(cd Toy; make clean)
 	rm -rf lib h
 
