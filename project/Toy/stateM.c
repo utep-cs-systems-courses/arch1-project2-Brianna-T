@@ -23,8 +23,9 @@ void state_advance(){
   char changed=0;
 
   static enum {R=0, G=1} color=G; //Green starts on
-  switch (color){ //blinking only red, while green is on
-    case R: changed = toggle_red(); color=G; break;
+  switch (color){ //blinking only green, wanted red, but instead green
+  case G: changed = toggle_red(); color=R; break;
+  case R: changed = toggle_red(); color=G; break;
   }
 
   led_changed = changed;
