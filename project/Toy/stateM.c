@@ -1,5 +1,6 @@
 #include <msp430.h>
-#include "Blinkled.c"
+#include "stateM.h"
+#include "Blinkled.h"
 
 char toggle_red()/* always toggles */
 {
@@ -7,13 +8,25 @@ char toggle_red()/* always toggles */
 
   switch (state) {
   case 0:
-    green_on = 1;
+    red_on = 1;
     state = 1;
     break;
   case 1:
-    green_on = 0;
+    red_on = 0;
     state = 0;
     break;
   }
   return 1; /*changes an led */
+}
+
+void state_advance(){
+  char changed=0;
+
+  static enum {R=0, G=1} color=G; //Green starts on
+  switch (color){ //blinking only red, while green is on
+    case R: changed = toggle_red(); color=G; break;
+  }
+
+  led_changed = changed;
+  led_update();
 }
