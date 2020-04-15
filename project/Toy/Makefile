@@ -10,7 +10,7 @@ AS              = msp430-elf-as
 all: toy.elf 
 
 #additional rules for files
-toy.elf: ${COMMON_OBJECTS} Blinkmain.o stateM.o Blinkled.o interrupt.o buzz.o Buzzmain.o ../Timer.a
+toy.elf: ${COMMON_OBJECTS} Toymain.o stateM.o Blinkled.o wdInterruptHandler.o buzz.o ../lib/libTimer.a
 	${CC} ${CFLAGS} -o $@ $^
 
 load: toy.elf
@@ -19,11 +19,10 @@ load: toy.elf
 clean:
 	rm -f *.o *.elf
 
-Blinkled.o: Blinkled.c
-interrupt.o: interrupt.c
-stateM.o:Blinkled.c stateM.c
+Blinkled.o: Blinkled.c Blinkled.h
+wdInterruptHandler.o: stateM.h
+stateM.o:Blinkled.h stateM.h
 
-buzzer.c: buzz.c
-buzzerMain.c: buzz.c
+buzz.c:buzz.h
 
 
